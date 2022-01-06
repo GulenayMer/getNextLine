@@ -13,17 +13,17 @@
 #include "get_next_line.h"
 
 /* */
-char	ft_line_next(char *line, int fd)
+char	ft_read_line(char *line, int fd)
 {
 	char	*buffer;
 	int		nbytes;
 	char 	*line_end;
 	
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));  /* allocate memory for the temporary storage */
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));  /* allocate memory for the buffer */
 	if (!buffer)
 		return (0);
 	line_end = ft_strchr(line, '\n'); /* how I know it is the next line: by checking the ft_strchr function */
-	while(!line_end && nbytes != 0)
+	while(nbytes > 0)
 	{
 		/* read (): reads in data in bytes, the number of which is specified by the caller, from the file; and stores in a buffer supplied 
 		by the calling process  --- ssize_t read(int fd, void *buf, size_t count) */
@@ -48,10 +48,8 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-
-
-
-
+    str = ft_read_line(fd, str);
+	line = ft_get_line(str);
 
 	return (line);
 	}

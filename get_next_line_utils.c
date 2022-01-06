@@ -13,7 +13,7 @@
 #include "get_next_line.h"
 
 /* size_t ft_str_length(const char *str) will be used to find the string lenght */
-/* size_t ft_str_length(const char *str)
+size_t ft_str_length(const char *str)
 {
 	size_t	count;
 
@@ -25,10 +25,10 @@
 		count++;
 	}
 	return (count);
-} */
+} 
 
 /* char	*ft_strchr(const char *s, int c) will be used to check the charachter new line ('/n') */
-/* char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
 
@@ -46,11 +46,11 @@
 		return ((char *)(s + i));
 	}
 	return (0);
-} */
+}
 
 /* char	*ft_strjoin(char *left_str, char *buff) will be used to join the the line stored in the buffer and the string left (it will used
 every time to join the new buffer and the string left until the file ends) */
-/* char	*ft_strjoin(char *str_left, char *temp)
+char	*ft_strjoin(char *str_left, char *temp)
 {
 	size_t	i;
 	size_t	j;
@@ -65,7 +65,7 @@ every time to join the new buffer and the string left until the file ends) */
 	if (!str_left || !temp)
 		return (0);
 	merged_str = (char *)malloc(sizeof(char) * ((ft_str_length(str_left) + ft_str_length(temp)) + 1)); /* string in the buffer(which is already read) plus the left(the next) string */
-/* 	if (!merged_str)
+	if (!merged_str)
 		return (0);
 	i = 0;
 	j = 0;
@@ -81,38 +81,38 @@ every time to join the new buffer and the string left until the file ends) */
 	merged_str[ft_str_length(str_left) + ft_str_length(temp)] = '\0';
 	//free(merged_str);
 	return (merged_str);
-} */
+}
 
-/* char	*ft_get_line(char *str) is used to read a line into str/temp
+/* char	*ft_get_line(char *str) is used to read a string into line
 get_line will read a single line from stdin; lines are delimited by newline ('/n') chars, get_line will read up to
 and including the newline.  */
- char	*ft_get_line(char *str)
+char	*ft_get_line(char *str)
 {
 	int		i;
-	char	*temp;
+	char	*line;
 
 	i = 0;
  	if (!str[i])
 		return (0); 
 	while (str[i] && str[i] != '\n')
 		i++;
-	temp = malloc(sizeof(char) * (i + 2)); /* i + 2 -- for newline character and null terminator*/
-	if (!temp)
+	line = malloc(sizeof(char) * (i + 2)); /* i + 2 -- for newline character and null terminator*/
+	if (!line)
 		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != '\n')
 	{
-		temp[i] = str[i];
+		line[i] = str[i];
 		i++;
 	}
 	if (str[i] == '\n')  /* if newline is encountered, it will add the newline to the end of the current string before 
 								adding the null terminator. */
 	{
-		temp[i] = str[i];
+		line[i] = str[i];
 		i++;
 	}
-	temp[i] = '\0';
-	return (temp);
+	line[i] = '\0';
+	return (line);
 }
 
 int main(void)
