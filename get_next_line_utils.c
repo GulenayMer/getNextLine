@@ -6,13 +6,13 @@
 /*   By: mgulenay <mgulenay@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 18:13:36 by mgulenay          #+#    #+#             */
-/*   Updated: 2022/01/13 12:59:15 by mgulenay         ###   ########.fr       */
+/*   Updated: 2022/01/16 23:24:47 by mgulenay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t ft_str_length(const char *str)
+size_t	ft_strlen(char *str)
 {
 	size_t	count;
 
@@ -20,22 +20,20 @@ size_t ft_str_length(const char *str)
 	if (!str)
 		return (0);
 	while (str[count] != '\0')
-	{
 		count++;
-	}
 	return (count);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!s)
-		return(0);
+		return (0);
 	while (s[i] != '\0')
 	{
-		if (s[i] == (char)c)
+		if (s[i] == (char) c)
 			return ((char *)&s[i]);
 		i++;
 	}
@@ -46,77 +44,45 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strdup(const char *s)
+void	*ft_memmove(void *dest, void *src, size_t len)
 {
-	char	*p;
-	int		i;
+	unsigned char		*p_dst;
+	unsigned char		*p_src;
+	size_t				i;
 
-	p = (char *)malloc(sizeof(*s) * (ft_str_length(s) + 1));
-	if (p == 0)
-	{
-		return (NULL);
-	}
+	p_dst = dest;
+	p_src = src;
 	i = 0;
-	while (s[i] != '\0')
+	if (!dest && !src)
+		return (0);
+	if (p_dst > p_src)
+		while (len-- > 0)
+			p_dst[len] = p_src[len];
+	else
 	{
-		p[i] = s[i];
-		i++;
+		while (i < len)
+		{
+			p_dst[i] = p_src[i];
+			i++;
+		}
 	}
-	p[i] = '\0';
-	return (p);
+	return (dest);
 }
 
-char	*ft_strjoin(char *str_saved, char *temp)
+char	*ft_strjoin(char *chars_saved, char *temp)
 {
-	size_t	i;
-	size_t	j;
-	char	*merged_str;
+	size_t	len;
+	char	*new;
 
-	if (!str_saved || !temp)
+	if (!chars_saved && !temp)
 		return (0);
-	merged_str = malloc(sizeof(char) * ((ft_str_length(str_saved) + ft_str_length(temp)) + 1));
-	if (!merged_str)
+	len = ft_strlen((char *)chars_saved) + ft_strlen((char *)temp);
+	new = malloc(sizeof(char) * (len + 1));
+	if (!new)
 		return (0);
-	i = 0;
-	while (str_saved[i] != '\0')
-	{	merged_str[i] = str_saved[i];
-		i++;
-	}
-	j = 0;
-	while (temp[j] != '\0')
-	{	merged_str[i] = temp[j];
-		i++;
-		j++;
-	}
-	merged_str[i] = '\0';
-	free(str_saved);
-	return (merged_str);
+	ft_memmove(new, chars_saved, ft_strlen(chars_saved));
+	ft_memmove(new + ft_strlen(chars_saved), temp, ft_strlen(temp));
+	new[len] = '\0';
+	free(chars_saved);
+	return (new);
 }
-
-char	*ft_substr(char *str_saved, unsigned int start, size_t len)
-{
-	char	*subs;
-	size_t	i;
-
-	if (!str_saved)
-		return (0);
-	subs = (char *)malloc(len + 2);
-	if (!subs)
-		return (0);
-	i = 0;
-	while (start < ft_str_length(str_saved) && i < len)
-	{
-		subs[i] = str_saved[start];
-		start++;
-		i++;
-	}
-	subs[i++] = '\n';
- 	if (str_saved[i] == '\n')
-	{
-		subs[i] = str_saved[i];
-		i++;
-	} 
-	subs[i] = '\0';
-	return (subs);
-}
-

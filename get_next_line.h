@@ -5,30 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgulenay <mgulenay@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/28 18:10:16 by mgulenay          #+#    #+#             */
-/*   Updated: 2022/01/13 13:00:35 by mgulenay         ###   ########.fr       */
+/*   Created: 2022/01/16 23:31:53 by mgulenay          #+#    #+#             */
+/*   Updated: 2022/01/16 23:38:28 by mgulenay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#include <stddef.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdlib.h>
+# include <unistd.h>
+# include <stdlib.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 char	*get_next_line(int fd);
-char	*ft_read_file(char *str_read, int fd);
-char	*ft_get_line(char *str_saved);
-char	*ft_new_remain_str(char *str_saved);
-
-char	*ft_strdup(const char *s);
-char	*ft_strjoin(char *str_saved, char *temp);
-char	*ft_strchr(const char *s, int c);
-size_t 	ft_str_length(const char *str);
-char	*ft_substr(char *str_saved, unsigned int start, size_t len);
-
+char	*ft_read_file(int fd, char *chars_read);
+char	*ft_extract_line(char *chars_read);
+char	*ft_update_static(char *char_read);
+size_t	ft_strlen(char *str);
+char	*ft_strchr(char *s, int c);
+void	*ft_memmove(void *dest, void *src, size_t len);
+char	*ft_strjoin(char *chars_saved, char *temp);
 
 #endif
