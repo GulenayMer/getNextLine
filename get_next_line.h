@@ -6,7 +6,7 @@
 /*   By: mgulenay <mgulenay@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 23:31:53 by mgulenay          #+#    #+#             */
-/*   Updated: 2022/01/16 23:38:28 by mgulenay         ###   ########.fr       */
+/*   Updated: 2022/01/17 10:55:29 by mgulenay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stddef.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
